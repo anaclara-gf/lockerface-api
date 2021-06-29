@@ -9,9 +9,7 @@ import { UsersModule } from './users/users.module';
 require('dotenv').config()
 
 @Module({
-  imports: [MongooseModule.forRoot(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@lockerface-cluster.ccntl.mongodb.net/nestjs-demo?retryWrites=true&w=majority`
-    ), LockersModule, UsersModule],
+  imports: [MongooseModule.forRoot(process.env.MONGODB_URI), LockersModule, UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })
