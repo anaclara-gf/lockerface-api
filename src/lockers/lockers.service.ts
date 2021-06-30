@@ -1,14 +1,14 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { Locker } from "./locker.model";
 
 @Injectable()
 export class LockersService {
-    constructor (@InjectModel('Locker') private readonly lockerModule: Model<Locker>) {}
+    constructor (@InjectModel('Locker') private readonly lockerModel: Model<Locker>) {}
 
     async insertLocker(lockerNumber: number, size: string) {
-        const newLocker = new this.lockerModule({
+        const newLocker = new this.lockerModel({
             lockerNumber,
             size
         });
@@ -17,12 +17,37 @@ export class LockersService {
     }
 
     async getLockers() {
-        const lockers = await this.lockerModule.find().exec();
+        const lockers = await this.lockerModel.find().exec();
         return lockers.map((locker) => ({
             id: locker.id, 
             lockerNumber: locker.lockerNumber,
             lockerSize: locker.size,
             lockerIsAvailable: locker.isAvailable
         }));
+    }
+
+    async getLockersAvailableBySize(lockerSize: string) {
+        const lockers = await this.lockerModel.find({ size: lockerSize, isAvailable: true }).exec();
+        return lockers.map((locker) => ({
+            id: locker.id, 
+            lockerNumber: locker.lockerNumber,
+            lockerSize: locker.size,
+            lockerIsAvailable: locker.isAvailable
+        }));
+    }
+
+    async updateLockerAvailability(id: string, isAvailable: boolean) {
+        const locker = await this.findLockerById(id);
+        locker.isAvailable = isAvailable;
+        locker.save();
+    }
+
+    async findLockerById(id: string) {
+        try {
+            const locker = await this.lockerModel.findById(id).exec();
+            return locker;
+        } catch (error) {
+            throw new NotFoundException('Could not find product.');
+        }
     }
 }

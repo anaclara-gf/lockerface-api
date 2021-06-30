@@ -1,5 +1,5 @@
 import { LockersService } from './lockers.service';
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 
 @Controller('lockers')
 export class LockersController {
@@ -23,4 +23,9 @@ export class LockersController {
         return lockers;
     }
 
+    @Get(':size')
+    async findLockersAvailableBySize(@Param('size') size: string) {
+        const lockers = await this.lockersService.getLockersAvailableBySize(size);
+        return lockers;
+    }
 }

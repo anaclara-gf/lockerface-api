@@ -1,5 +1,5 @@
 import { UsersService } from './users.service';
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, HttpException, HttpStatus } from "@nestjs/common";
 
 @Controller('users')
 export class UsersController {
@@ -11,12 +11,27 @@ export class UsersController {
         @Body('role') userRole: string,
         @Body('personId') personId: string
     ) {
-        const generatedId = await this.usersService.insertUser(
+        const result = await this.usersService.insertUser(
             userName, 
             userRole,
             personId
         );
-        return { id: generatedId }
+        return result;
     }
 
+    @Get(':name')
+    async getUserByName(@Param('name') name: string) {
+        const decodedName = decodeURIComponent(name);
+        
+        const user = await this.usersService.getUserByName(decodedName);
+        if(user){
+            return user;
+        }
+
+        throw new HttpException({
+            status: HttpStatus.NOT_FOUND,
+            error: 'There is no user with this name',
+            }, HttpStatus.NOT_FOUND);
+        
+    }
 }

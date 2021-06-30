@@ -11,4 +11,4 @@ export interface Locker {
     lockerNumber: number;
     size: string;
     isAvailable: boolean;
-  }
+}

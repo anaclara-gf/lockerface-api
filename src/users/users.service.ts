@@ -5,16 +5,21 @@ import { User } from "./user.model";
 
 @Injectable()
 export class UsersService {
-    constructor (@InjectModel('User') private readonly userModule: Model<User>) {}
+    constructor (@InjectModel('User') private readonly userModel: Model<User>) {}
 
     async insertUser(name: string, role: string, personId: string) {
-        const newUser = new this.userModule({
+        const newUser = new this.userModel({
             name,
             role,
             personId
         });
         const result = await newUser.save();
-        return result.id as string;
+        return {"name": result.name, "id": result.id} as object;
+    }
+
+    async getUserByName(userName: string) {
+        const user = await this.userModel.findOne({ name: userName }).exec();
+        return user;
     }
 
 }
