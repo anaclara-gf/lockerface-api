@@ -23,8 +23,8 @@ export class UsersService {
     }
 
     async findUserByPersonId(personId: string) {
-        const user = await this.userModel.findOne({ personId: personId }).exec();
-        return user;
+        const userByPersonId = await this.userModel.findOne({ personId: personId }).exec();
+        return userByPersonId;
     }
 
 }

@@ -34,12 +34,12 @@ export class UsersController {
         }, HttpStatus.NOT_FOUND);
     }
 
-    @Get(':personId')
+    @Get('id/:personId')
     async getUserByPersonId(@Param('personId') personId: string) {
-        const user = await this.usersService.findUserByPersonId(personId);
-
-        if(user) {
-            return user;
+        const userByPersonId = await this.usersService.findUserByPersonId(personId);
+        console.log(userByPersonId)
+        if(userByPersonId) {
+            return userByPersonId;
         }
         
         throw new HttpException({
