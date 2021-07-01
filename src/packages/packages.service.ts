@@ -29,4 +29,15 @@ export class PackagesService {
             return result;
         }
     }
+
+    async searchPackageInLockerByPersonId(personId) {
+        const packages = await this.packageModel.find({ personId: personId, status: "inLocker" }).exec();
+        return packages;
+    }
+
+    async updatePackageStatus(id) {
+        const packageToBeUpdated = await this.packageModel.findById(id).exec();
+        packageToBeUpdated.status = 'delivered';
+        packageToBeUpdated.save();
+    }
 }

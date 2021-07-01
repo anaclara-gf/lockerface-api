@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post, Param } from "@nestjs/common";
 import { PackagesService } from './packages.service';
 import { LockersService } from 'src/lockers/lockers.service';
 import { UsersService } from 'src/users/users.service';
@@ -19,7 +19,7 @@ export class PackagesController {
     ) {
         const user = await this.usersService.getUserByName(userName);
         const lockersAvailable = await this.lockersService.getLockersAvailableBySize(size);
-        await this.lockersService.updateLockerAvailability(lockersAvailable[0].id, false);
+        await this.lockersService.updateLockerAvailability(false, lockersAvailable[0].lockerNumber);
         if(user) {
             const packageIncluded = await this.packagesService.insertPackage(
                 userName, 
@@ -38,5 +38,19 @@ export class PackagesController {
             );
             return packageIncluded;
         }
+    }
+
+    @Get(':personId')
+    async getPackagesByPersonId(@Param('personId') personId: string) {
+        const packages = await this.packagesService.searchPackageInLockerByPersonId(personId);
+        let lockerNumbers = [];
+        packages.forEach(async eachPackage => {
+            await this.lockersService.updateLockerAvailability(true, eachPackage.lockerNumber);
+            await this.packagesService.updatePackageStatus(eachPackage.id);
+        });
+        packages.map(eachPackage => {
+            lockerNumbers.push(eachPackage.lockerNumber);
+        });
+        return lockerNumbers;
     }
 }

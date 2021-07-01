@@ -36,10 +36,10 @@ export class LockersService {
         }));
     }
 
-    async updateLockerAvailability(id: string, isAvailable: boolean) {
-        const locker = await this.findLockerById(id);
-        locker.isAvailable = isAvailable;
-        locker.save();
+    async updateLockerAvailability(isAvailable: boolean, lockerNumber: number) {
+        const locker = await this.lockerModel.find({ lockerNumber: lockerNumber }).exec();
+        locker[0].isAvailable = isAvailable;
+        locker[0].save();
     }
 
     async findLockerById(id: string) {
