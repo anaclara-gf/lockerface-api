@@ -23,7 +23,7 @@ export class UsersController {
     async getUserByName(@Param('name') name: string) {
         const decodedName = decodeURIComponent(name);
         
-        const user = await this.usersService.getUserByName(decodedName);
+        const user = await this.usersService.findUserByName(decodedName);
         if(user){
             return user;
         }
@@ -31,7 +31,20 @@ export class UsersController {
         throw new HttpException({
             status: HttpStatus.NOT_FOUND,
             error: 'There is no user with this name',
-            }, HttpStatus.NOT_FOUND);
+        }, HttpStatus.NOT_FOUND);
+    }
+
+    @Get(':personId')
+    async getUserByPersonId(@Param('personId') personId: string) {
+        const user = await this.usersService.findUserByPersonId(personId);
+
+        if(user) {
+            return user;
+        }
         
+        throw new HttpException({
+            status: HttpStatus.NOT_FOUND,
+            error: 'There is no user with this name',
+        }, HttpStatus.NOT_FOUND);
     }
 }

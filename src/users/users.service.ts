@@ -17,8 +17,13 @@ export class UsersService {
         return {"name": result.name, "id": result.id} as object;
     }
 
-    async getUserByName(userName: string) {
+    async findUserByName(userName: string) {
         const user = await this.userModel.findOne({ name: userName }).exec();
+        return user;
+    }
+
+    async findUserByPersonId(personId: string) {
+        const user = await this.userModel.findOne({ personId: personId }).exec();
         return user;
     }
 

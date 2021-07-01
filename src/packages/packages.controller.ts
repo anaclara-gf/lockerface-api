@@ -17,7 +17,7 @@ export class PackagesController {
         @Body('packageCode') packageCode: string,
         @Body('name') userName: string,
     ) {
-        const user = await this.usersService.getUserByName(userName);
+        const user = await this.usersService.findUserByName(userName);
         const lockersAvailable = await this.lockersService.getLockersAvailableBySize(size);
         await this.lockersService.updateLockerAvailability(false, lockersAvailable[0].lockerNumber);
         if(user) {
