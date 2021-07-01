@@ -61,6 +61,6 @@ export class PackagesController {
         await this.lockersService.updateLockerAvailability(true, packageToBeDelivered.lockerNumber);
         await this.packagesService.updatePackageStatus(packageToBeDelivered.id);
 
-        return {lockerNumber: packageToBeDelivered.lockerNumber};
+        return packageToBeDelivered;
     }
 }
