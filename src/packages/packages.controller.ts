@@ -53,4 +53,14 @@ export class PackagesController {
         });
         return lockerNumbers;
     }
+
+    @Get('code/:codeNumber')
+    async getPackagesByCodeNumber(@Param('codeNumber') codeNumber: string) {
+        const packageToBeDelivered = await this.packagesService.searchPackageInLockerByCode(codeNumber);
+
+        await this.lockersService.updateLockerAvailability(true, packageToBeDelivered.lockerNumber);
+        await this.packagesService.updatePackageStatus(packageToBeDelivered.id);
+
+        return {lockerNumber: packageToBeDelivered.lockerNumber};
+    }
 }
