@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Param } from "@nestjs/common";
+import { Body, Controller, Get, Post, Param, HttpStatus, HttpException } from "@nestjs/common";
 import { PackagesService } from './packages.service';
 import { LockersService } from 'src/lockers/lockers.service';
 import { UsersService } from 'src/users/users.service';
@@ -58,9 +58,15 @@ export class PackagesController {
     async getPackagesByCodeNumber(@Param('codeNumber') codeNumber: string) {
         const packageToBeDelivered = await this.packagesService.searchPackageInLockerByCode(codeNumber);
 
-        await this.lockersService.updateLockerAvailability(true, packageToBeDelivered.lockerNumber);
-        await this.packagesService.updatePackageStatus(packageToBeDelivered.id);
+        if(packageToBeDelivered) {
+            await this.lockersService.updateLockerAvailability(true, packageToBeDelivered.lockerNumber);
+            await this.packagesService.updatePackageStatus(packageToBeDelivered.id);
+            return packageToBeDelivered;
+        }
 
-        return packageToBeDelivered;
+        throw new HttpException({
+            status: HttpStatus.NOT_FOUND,
+            error: 'There is no package with this code',
+        }, HttpStatus.NOT_FOUND);
     }
 }
