@@ -6,14 +6,16 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
     @Post()
-    async addLocker(
+    async addUser(
         @Body('name') userName: string,
         @Body('role') userRole: string,
         @Body('personId') personId: string
     ) {
+        const nameWithNoSpaces = userName.trim();
+        const roleWithNoSpaces = userRole.trim();
         const result = await this.usersService.insertUser(
-            userName, 
-            userRole,
+            nameWithNoSpaces, 
+            roleWithNoSpaces,
             personId
         );
         return result;

@@ -17,14 +17,16 @@ export class PackagesController {
         @Body('packageCode') packageCode: string,
         @Body('name') userName: string,
     ) {
+        const packageCodeWithNoSpaces = packageCode.trim();
+        const userNameWithNoSpaces = userName.trim();
         const user = await this.usersService.findUserByName(userName);
         const lockersAvailable = await this.lockersService.getLockersAvailableBySize(size);
         await this.lockersService.updateLockerAvailability(false, lockersAvailable[0].lockerNumber);
         if(user) {
             const packageIncluded = await this.packagesService.insertPackage(
-                userName, 
+                userNameWithNoSpaces, 
                 size, 
-                packageCode, 
+                packageCodeWithNoSpaces, 
                 lockersAvailable[0].lockerNumber, 
                 user.personId,
             );
