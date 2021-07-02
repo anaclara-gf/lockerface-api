@@ -1,5 +1,5 @@
 import { LockersService } from './lockers.service';
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, HttpException, HttpStatus } from "@nestjs/common";
 
 @Controller('lockers')
 export class LockersController {
@@ -26,6 +26,14 @@ export class LockersController {
     @Get(':size')
     async findLockersAvailableBySize(@Param('size') size: string) {
         const lockers = await this.lockersService.getLockersAvailableBySize(size);
-        return lockers;
+
+        if(lockers.length > 0){
+            return lockers;
+        }
+
+        throw new HttpException({
+            status: HttpStatus.NOT_FOUND,
+            error: 'There is no lockers available in this size',
+        }, HttpStatus.NOT_FOUND);
     }
 }
