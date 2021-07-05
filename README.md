@@ -1,6 +1,6 @@
 <div align="center">
   <h1>LockerFace API</h1>
-<p>A API LockerFace foi feita para suportar o aplicativo, cujo projeto se encontra <a href="https://github.com/anaclara-gf/lockerface-app"><b>neste</b></a></p> respositório.
+<p>A API LockerFace foi feita para suportar o aplicativo, cujo projeto se encontra <a href="https://github.com/anaclara-gf/lockerface-app"><b>neste</b></a> respositório.</p>
   <p>Foi usado <a href="https://nestjs.com/"><b>NestJS</b></a>, framework Node.js, para escrever esse projeto. Também utilizou-se <a href="https://www.mongodb.com/pt-br"><b>mongoDB</b></a> como banco de dados</p>.
 </div>
 <p align="center">
