@@ -45,7 +45,7 @@ export class UsersController {
         
         throw new HttpException({
             status: HttpStatus.NOT_FOUND,
-            error: 'There is no user with this name',
+            error: 'There is no user with this personId',
         }, HttpStatus.NOT_FOUND);
     }
 }

@@ -1,73 +1,48 @@
+<div align="center">
+  <h1>LockerFace API</h1>
+<p>A API LockerFace foi feita para suportar o aplicativo, cujo projeto se encontra <a href="https://github.com/anaclara-gf/lockerface-app"><b>neste</b></a></p> respositório.
+  <p>Foi usado <a href="https://nestjs.com/"><b>NestJS</b></a>, framework Node.js, para escrever esse projeto. Também utilizou-se <a href="https://www.mongodb.com/pt-br"><b>mongoDB</b></a> como banco de dados</p>.
+</div>
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+ <a href="#pré-requisitos">Pré-requisitos</a> •
+ <a href="#instalação">Instalação</a> •
+ <a href="#tecnologias">Tecnologias</a> •
+ <a href="#créditos">Créditos</a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Pré-requisitos 
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+[Git](https://git-scm.com) e [Node.js](https://nodejs.org/en/). 
 
-## Description
+Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/). Também recomendo você baixar o [MongoDB Compass](https://www.mongodb.com/try/download/compass) para visualizar o banco de dados e o [Postman](https://www.postman.com/) (ou qualquer semelhante) para testar os endpoints da API.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Instalação
 
-## Installation
+1. Clonar o repositório na sua máquina
 
-```bash
-$ npm install
+2. Instalar as dependências com `npm install`
+
+3. Criar um cluster gratuito no [mongoDB Atlas](https://www.mongodb.com/pt-br)
+
+4. Criar um arquivo .env na raíz do projeto no qual você irá colocar a URI de conexão com o banco de dados.
+```JavaScript
+MONGODB_URI=sua-uri-aqui
 ```
 
-## Running the app
+5. Iniciar o projeto com `npm run start:dev`
 
-```bash
-# development
-$ npm run start
+Pronto! A API já estará disponível para testes no localhost:3000
 
-# watch mode
-$ npm run start:dev
+## Tecnologias
 
-# production mode
-$ npm run start:prod
-```
+As seguintes ferramentas foram usadas na construção do projeto:
 
-## Test
+- [Node.js](https://nodejs.org/en/)
+- [NestJS](https://nestjs.com)
+- [MongoDB](https://www.mongodb.com/pt-br)
+- [Mongoose](https://mongoosejs.com/)
 
-```bash
-# unit tests
-$ npm run test
+## Créditos
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+Esse projeto é de autoria de [Ana Clara Garcia Farah](https://github.com/anaclara-gf)
